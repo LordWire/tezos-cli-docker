@@ -6,11 +6,11 @@ TEZOS_NODE_DIR="$(pwd)"/tezos-node/
 
 if [ -d $TEZOS_NODE_DIR ]; then
   echo starting node with identity in $TEZOS_NODE_DIR
-  docker run -d --mount type=bind,source=$TEZOS_NODE_DIR,target=/root/.tezos-node/ -it testimage /tezos/tezos-node run --rpc-addr 0.0.0.0
+  docker run -d --mount type=bind,source=$TEZOS_NODE_DIR,target=/root/.tezos-node/ -it tezos-cli-docker /tezos/tezos-node run --rpc-addr 0.0.0.0
 else
   echo identity file not found. Creating new identity in $TEZOS_NODE_DIR
-  docker run --mount type=bind,source=$TEZOS_NODE_DIR,target=/root/.tezos-node/ -it testimage /tezos/tezos-node identity generate
+  docker run --mount type=bind,source=$TEZOS_NODE_DIR,target=/root/.tezos-node/ -it tezos-cli-docker /tezos/tezos-node identity generate
 
   echo starting node with identity in $TEZOS_NODE_DIR
-  docker run -d --mount type=bind,source=$TEZOS_NODE_DIR,target=/root/.tezos-node/ -it testimage /tezos/tezos-node run --rpc-addr 0.0.0.0
+  docker run -d --mount type=bind,source=$TEZOS_NODE_DIR,target=/root/.tezos-node/ -it tezos-cli-docker /tezos/tezos-node run --rpc-addr 0.0.0.0
 fi
