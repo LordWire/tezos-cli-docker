@@ -54,9 +54,9 @@ This will execute tezos-client, which will connect to the already-running node f
 ### Future work
 
 Things under consideration:
-     - wrapper scripts for all binaries
-     - more intelligent scripts, e.g. capability to stop the node, logging options etc. 
-     - a sophisticated build script, capable of switching between the tezos branches. 
-     - Maybe a Jenkins service and Jenkinsfile for automated builds. Just maybe.
+  - wrapper scripts for all binaries
+  - more intelligent scripts, e.g. capability to stop the node, logging options etc. 
+  - a sophisticated build script, capable of switching between the tezos branches. 
+  - Maybe a Jenkins service and Jenkinsfile for automated builds. Just maybe.
      
     
