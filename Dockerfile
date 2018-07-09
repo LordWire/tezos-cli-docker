@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+
+ARG TZBRANCH=betanet
 ## prereqs
 RUN apt-get update && \
     apt-get install -y make git wget curl bubblewrap unzip build-essential m4 rsync && \
@@ -11,7 +13,7 @@ RUN apt-get update && \
     echo 'eval $(opam env)' >> ~/.bashrc && \
     git clone https://gitlab.com/tezos/tezos.git && \
     cd tezos/ && \
-    git checkout betanet && \
+    git checkout $TZBRANCH && \
     eval $(opam env)  && \
     apt-get update && \
     make build-deps && \
