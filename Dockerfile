@@ -1,27 +1,21 @@
-FROM ubuntu:18.04
 
-
+FROM ocaml/opam2:ubuntu-lts  as compiler
 ARG TZBRANCH=betanet
-## prereqs
-RUN apt-get update && \
-    apt-get install -y make git wget curl bubblewrap unzip build-essential m4 rsync && \
-    rm -rf /var/lib/apt/lists/* && \
-    curl -sL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh -o install.sh && \
-    sh -c '/bin/echo -e "\n" | sh install.sh' && \
-    opam init --disable-sandboxing --yes && \
-    eval $(opam env) && \
-    echo 'eval $(opam env)' >> ~/.bashrc && \
-    git clone https://gitlab.com/tezos/tezos.git && \
+RUN git clone https://gitlab.com/tezos/tezos.git && \
+    pwd && \
     cd tezos/ && \
     git checkout $TZBRANCH && \
-    eval $(opam env)  && \
-    apt-get update && \
+    sudo apt-get update
+RUN cd tezos/ &&\ 
+    . /etc/profile && \
+    eval $(opam env) && \
     make build-deps && \
-    eval $(opam env)  && \
+    eval $(opam env) && \
     make && \
-    rm -rf /tezos/_build/ && \
-    rm -rf /tezos/_opam/ && \
-    rm -rf /root/.opam/ && \
-    rm -rf /var/lib/apt/lists/*
-
+    rm -rf /home/opam/opam-repository/tezos/_build/ && \
+    rm -rf /home/opam/opam-repository/tezos/_opam/ && \
+    rm -rf ~/.opam/ 
+FROM ubuntu:18.04
+COPY --from=compiler /home/opam/opam-repository/tezos/ /tezos/
 EXPOSE 8732/tcp
+
