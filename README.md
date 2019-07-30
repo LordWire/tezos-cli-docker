@@ -29,14 +29,16 @@ Grab a coffee, since ocaml has a lot of work to do to build tezos-cli.
 
 
 ### Pulling the image
-__Note:__ I do repeat that this is not in anyway recommended since it can prove to be a security risk. Trusting public docker images is, well, bad. Very.
-If you do however wish to pull the image to start a node and play with the network anonymously (which is as safe as pulling any other image as well), simply run: 
+__Note__: this is a bad idea. You do not want to pull 
+an image I created and interact with it. However, it's
+kinda safe since it's built on Docker Hub using these sources.
 
->     docker pull lordwire/tezos-cli-docker
+The convenience script will also pull the image (obviously):
+>     bin/tezos-node start
 
 
 ### Using the convenience scripts: 
-You can now start a node and use tezos-cli to transact with the betanet. All instructions below are working from inside the repo directory, after you have built or pulled a docker image. Everything else remains the same. 
+You can now start a node and use tezos-cli to transact with the mainnet. All instructions below are working from inside the repo directory. 
 
 #### start a node:
 The following command will start a node, working with the identity file found in `./tezos-node`. If it is the first execution, an identity will be generated and the node will be started afterwards. 
@@ -55,7 +57,5 @@ This will execute tezos-client, which will connect to the already-running node f
 
 Things under consideration:
   - wrapper scripts for all binaries
-  - more intelligent scripts, e.g. capability to stop the node, logging options etc. 
-  - Maybe a Jenkins service and Jenkinsfile for automated builds. Just maybe.
+  - more intelligent scripts. 
   - Reduce the image size even further.
-    

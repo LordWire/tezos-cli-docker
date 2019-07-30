@@ -41,6 +41,11 @@ stopnode(){
     docker kill tezosnode
 }
 
+getlogs(){
+    docker logs -f tezosnode
+}
+
+
 # main logic
 case $1 in
     start)
@@ -48,6 +53,9 @@ case $1 in
       ;;
     stop)
       stopnode
+      ;;
+    logs)
+      getlogs
       ;;
     *)
       echo "unknown option"
